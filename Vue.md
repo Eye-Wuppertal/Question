@@ -104,3 +104,51 @@ export default {
 </style>
 ```
 
+### 0002 父组件通过props向子组件传值
+
+```vue
+<!--父组件-->
+<DownRight v-if="isRouterAlive" :meetingId="this.meetingIdInput"/>
+
+<!--子组件-->
+
+<template>
+  <div >
+    <img style="height: 100%; width: 100%; margin-top: 5px;
+    background-color: rgb(255,255,255)"  :src="`http://localhost:8000/ldaFile/WordCloud_${imgUrl}.png`">
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: "downRight",
+  props:{
+    meetingId: String
+  },
+  data(){
+    return{
+      imgUrl:'001'
+    }
+  },
+  mounted () {
+
+
+  },
+  created(){
+    this.imgUrl = this.meetingId;
+  },
+  watch:{
+    inputId(val){
+      this.imgUrl = val;
+    }
+  }
+
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
