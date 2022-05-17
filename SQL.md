@@ -52,9 +52,29 @@ INSERT INTO tb_addrbook(num,name,mobile) VALUE('1001','小李','13112345678') ON
 REPLACE INTO 表名称(列1, 列2, 列3) VALUES(值1, 值2, 值3)
 ```
 
+### 0006 排序
 
+```sql
+ORDER BY m1.member_id1 			# 默认为顺序
+ORDER BY m1.member_id1 DESC 	# DESC 为逆序
+```
 
+### 0007 分组排序取前TOPN
 
+```sql
+SELECT 
+member_id1,member_id2,member_relatedNum
+FROM `member_relationship` m1
+WHERE
+10>(
+SELECT COUNT(*) FROM `member_relationship` m2
+WHERE m2.member_id1 = m1.member_id1 
+AND m1.member_relatedNum  <=  m2.member_relatedNum
+)
+ORDER BY m1.member_id1, m1.member_relatedNum DESC 
+```
+
+详情见：https://blog.csdn.net/qq_41934680/article/details/120816081
 
 
 
