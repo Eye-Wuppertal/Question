@@ -72,9 +72,79 @@ WHERE m2.member_id1 = m1.member_id1
 AND m1.member_relatedNum  <=  m2.member_relatedNum
 )
 ORDER BY m1.member_id1, m1.member_relatedNum DESC 
+
+# 02 窗口函数 MYSQL需要使用8以上的版本
+select * 
+from 
+(select 
+    member_id1,member_id2,member_relatedNum,
+    row_number() over(
+        partition by member_id1					# partition by 接分组字段
+        order by member_relatedNum desc) num	 # order by 接排序字段
+ 	from member_relationship) as mr
+where num <=10	
 ```
 
 详情见：https://blog.csdn.net/qq_41934680/article/details/120816081
+
+### 0008 SQL 在有5.7的版本下，安装8
+
+详情见：http://t.csdn.cn/yt05W
+
+### 0009 SQL 常用关键字顺序
+
+```sql
+select
+from
+where
+group by
+order by
+```
+
+```java
+{
+    member_id1:'001'
+    member_id2:'002'
+    member_relatedNum:1
+},
+{
+    member_id1:'001'
+    member_id2:'003'
+    member_relatedNum:2
+},{...}...
+    
+    
+{
+    member_id1:'001',
+    relatedMember:[{
+        member_id2:'002'
+        member_relatedNum:1
+    },
+    {
+        member_id2:'003'
+        member_relatedNum:2
+    }...]
+}    
+    
+    
+    
+```
+
+```js
+const map = {}
+temp1.forEach((item,i)=>{
+    const id1 = item.member_id1; 
+    const id2 = item.member_id2;
+    const relate = item.member_relatedNum; 
+    if(!map[id1]){
+        map[id1]={member_id1:id1}
+    }
+    map[id1].member_relatedNum.push({
+        member_id2:id2,
+        member_relatedNum:relate
+    })
+})
+```
 
 
 
