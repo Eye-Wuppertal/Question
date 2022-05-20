@@ -111,3 +111,45 @@ const temp1 = [{
 ![image-20220519231545910](img/image-20220519231545910.png)
 
 出现push undefined可能是因为没有初始化数组，导致缺少push属性，初始化=[ ]即可
+
+### 0005 indexOf() 方法
+
+```js
+var str="Hello world, welcome to the universe.";
+var n=str.indexOf("welcome");
+// 输出：13
+// indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置，
+/如果没有找到匹配的字符串则返回 -1。
+```
+
+### 0006 promise、resolve，reject
+
+new Promise()返回一个promise对象，该对象共有三种状态：进行中、已完成和失败，回调函数的调用是根据对象的状态来完成的；该对象的原型上拥有then和catch等方法。
+
+resolve方法的作用是把promise对象的状态从进行中变成已完成，同时可以向resolve方法传入参数，这个参数会在将来被promise对象的then方法获取，而reject方法也是同样的道理，只不过是把promise对象状态变成失败，同时传入的参数会被catch方法获取而已。
+
+resolve和reject方法的作用只不过是根据代码逻辑，把promise对象的状态置为已完成或失败，同时通知promise方法的then方法或catch方法：我们已经修改promise对象的状态，接下来需要你们（then和catch）根据对象的状态决定走哪条路
+
+### 0007 字符串转数字
+
+```js
+// 1. 转换函数
+parseInt()   
+parseFloat()
+parseInt("1234blue"); //returns 1234
+parseInt("0xA"); //returns 10
+parseInt("22.5"); //returns 22
+parseInt("blue"); //returns NaN
+
+// 2. 强制类型转换
+Boolean(value) // 把给定的值转换成Boolean型；
+Number(value)  // 把给定的值转换成数字（可以是整数或浮点数）；
+String(value)  // 把给定的值转换成字符串。
+
+```
+
+### 0008 JS数组有值，但是长度为0
+
+js数组下标使用字符串时，不会被检索到，所以长度为0，
+
+可以使用遍历的方式得到长度length
