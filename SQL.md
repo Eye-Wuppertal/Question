@@ -146,5 +146,20 @@ temp1.forEach((item,i)=>{
 })
 ```
 
+### 0010 时间段
 
+```sql
+select * from booking where month(booking_time) =  month(curdate()) and year(booking_time) = year(curdate())  # month
+
+select * from spf_booking where month(booking_time) =  month(curdate()) and week(booking_time) = week(curdate())  #week
+
+SELECT *  
+ 
+FROM blog_article  
+ 
+WHERE year( FROM_UNIXTIME( BlogCreateTime ) ) = year( curdate( ))# year
+
+```
+
+详见：http://t.csdn.cn/Uz0bX
 
