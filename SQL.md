@@ -159,7 +159,26 @@ FROM blog_article
  
 WHERE year( FROM_UNIXTIME( BlogCreateTime ) ) = year( curdate( ))# year
 
+
+# 按照年统计次数
+select 
+	me.member_id ,
+    SUM(CASE WHEN year(mb.meeting_hostTime)=year(now()) THEN 1 ELSE 0 END) AS y1,
+    SUM(CASE WHEN year(mb.meeting_hostTime)=year(date_sub(now(),interval 1 year)) THEN 1 ELSE 0 END) AS y2,
+    SUM(CASE WHEN year(mb.meeting_hostTime)=year(date_sub(now(),interval 2 year)) THEN 1 ELSE 0 END) AS y3,
+    SUM(CASE WHEN year(mb.meeting_hostTime)=year(date_sub(now(),interval 3 year)) THEN 1 ELSE 0 END) AS y4,
+    SUM(CASE WHEN year(mb.meeting_hostTime)=year(date_sub(now(),interval 4 year)) THEN 1 ELSE 0 END) AS y5
+from meeting_base mb, meeting_evaluation me 
+where mb.meeting_index = me.meeting_index 
+group by me.member_id 
 ```
 
 详见：http://t.csdn.cn/Uz0bX
+
+### 0011 左连接left join
+
+```sql
+# 是以左表为基础，根据ON后给出的两表的条件将两表连接起来。结果会将左表所有的查询信息列出，而右表只列出ON后条件与左表满足的部分。左连接全称为左外连接，是外连接的一种。
+select * from A left join b on A
+```
 
