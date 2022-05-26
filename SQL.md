@@ -182,3 +182,8 @@ group by me.member_id
 select * from A left join b on A
 ```
 
+### 0012  创建时间字段
+
+字段 create_time  默认值可以设置为CURRENT_TIMESTAMP
+
+update_time 默认值可以设置为CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
