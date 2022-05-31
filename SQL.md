@@ -187,3 +187,26 @@ select * from A left join b on A
 字段 create_time  默认值可以设置为CURRENT_TIMESTAMP
 
 update_time 默认值可以设置为CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
+### 0013 MySQL5.x 自定义实现row_number() over(partition by ) 分组排序功能
+
+```sql
+select id,class,score,rank from (
+	select 
+		b.*,
+		@rownum := @rownum+1 ,
+    -- 定义用户变量@rownum来记录数据的行号。通过赋值语句@rownum := @rownum+1来累加达到递增行号。
+		if(@pdept=b.class,@rank:=@rank+1,@rank:=1) as rank,
+    -- 如果当前分组编号和上一次分组编号相同，则@rank（对每一组的数据进行编号）值加1，否则表示为新的分组，从1开始
+		@pdept:=b.class 
+    -- 定义变量@pdept用来保存上一次的分组id
+	from (select * from a order by a.class,a.score desc) b ,
+    -- 这里的排序不确定是否需要，保险点还是加上吧
+		(select @rownum :=0 , @pdept := null ,@rank:=0) c  
+    -- 初始化自定义变量值
+	order by b.class,b.score desc -- 该排序必须，否则结果会不对
+) result
+having rank < 2;
+
+```
+
