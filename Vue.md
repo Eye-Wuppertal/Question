@@ -152,3 +152,82 @@ export default {
 </style>
 ```
 
+### 0003 子组件向父组件传值
+
+1. 子组件主动触发将数据传递给父组件
+
+   1.1 在子组件上绑定触发事件this.$emit('getTreeData',this.$refs.treeData.getCheckedNodes());
+
+   ```vue
+   <template>
+       <div>
+           <Tree :data="treeData" show-checkbox ref="treeData"></Tree>
+           <Button type="success" @click="submit"></Button>
+       </div> 
+   </template>
+   
+   <script>
+   ...
+   submit(){
+        this.$emit('getTreeData',this.$refs.treeData.getCheckedNodes());
+         },
+    ...
+   
+   </script>
+   ```
+
+   1.2 在父组件中绑定触发事件<AuthTree/>为子组件
+
+   ```vue
+   <AuthTree  @getTreeData='testData'></AuthTree>
+   
+   <script>
+   ...
+   testData(data){
+         console.log("parent");
+         console.log(data)
+       },
+   
+    ...
+   
+   </script>
+   ```
+
+2. 父组件调用子组件
+
+   2.1子组件绑定def
+
+   ```vue
+   <template>
+       <div>
+       	<Tree :data="treeData" show-checkbox ref="treeData"></Tree>
+       </div>
+   </template>
+   <script>
+   ...
+   getData(){
+           return this.$refs.treeData.getCheckedNodes()
+       },
+    ...
+   
+   </script>
+   ```
+
+   2.2 父组件注册子组件后绑定ref
+
+   ```vue
+   <AuthTree ref="authTree"></AuthTree>
+   <script>
+   ...
+   console.log( this.$refs.authTree.getData());
+    ...
+   
+   </script>
+   ```
+
+### 0004 抛出信息
+
+```js
+this.$message.success('登录成功');
+```
+
