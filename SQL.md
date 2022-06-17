@@ -218,3 +218,15 @@ truncate #清空表内容
 delete #删除单行数据不释放空间
 ```
 
+### 0015 将查询结果插入新表
+
+```sql
+INSERT INTO 表名1(字段列表1) SELECT 字段列表2 FROM 表名2 WHERE 查询条件;
+```
+
+### 0016 查询为空时赋值为 ***
+
+```sql
+select ifnull(字段名,***) from 表名
+```
+
