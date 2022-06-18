@@ -231,3 +231,147 @@ export default {
 this.$message.success('登录成功');
 ```
 
+### 0005  在已经写完页面的情况下，加入自适应匹配方案（使用transform:scale =＞ 组件化抽离ScaleBox）
+
+创建一个ScaleBox组件
+
+```vue
+<template>
+  <div
+    class="ScaleBox"
+    ref="ScaleBox"
+    :style="{
+      width: width + 'px',
+      height: height + 'px',
+    }"
+  >
+    <slot></slot>
+  </div>
+</template>
+ 
+<script>
+export default {
+  name: "ScaleBox",
+  props: {},
+  data() {
+    return {
+      scale: 0,
+      width: 1920,
+      height: 1080,
+    };
+  },
+  mounted() {
+    this.setScale();
+    window.addEventListener("resize", this.debounce(this.setScale));
+  },
+  methods: {
+    getScale() {
+      // 固定好16：9的宽高比，计算出最合适的缩放比
+      const { width, height } = this;
+      const wh = window.innerHeight / height;
+      const ww = window.innerWidth / width;
+      console.log(ww < wh ? ww : wh);
+      return ww < wh ? ww : wh;
+    },
+    setScale() {
+      // 获取到缩放比例，设置它
+      this.scale = this.getScale();
+      if (this.$refs.ScaleBox) {
+        this.$refs.ScaleBox.style.setProperty("--scale", this.scale);
+      }
+    },
+    debounce(fn, delay) {
+      const delays = delay || 500;
+      let timer;
+      return function () {
+        const th = this;
+        const args = arguments;
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+          timer = null;
+          fn.apply(th, args);
+        }, delays);
+      };
+    },
+  },
+};
+</script>
+ 
+<style lang="scss">
+#ScaleBox {
+  --scale: 1;
+}
+.ScaleBox {
+  position: absolute;
+  transform: scale(var(--scale)) translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  transform-origin: 0 0;
+  left: 50%;
+  top: 50%;
+  transition: 0.3s;
+  z-index: 999;
+  // background: rgba(255, 0, 0, 0.3);
+}
+</style>
+ 
+```
+
+引用组件
+
+```vue
+<template>
+  <scale-box style="overflow: hidden;">
+    <Index v-if="isRouterAlive" @login="getLogin"/>
+    <Login v-if="!isRouterAlive" @login="getLogin"/>
+  </scale-box>
+
+</template>
+
+<script>
+ import Index from "./views/index";
+ import Login from "./views/login";
+ import ScaleBox from "@/utils/ScaleBox";
+
+export default {
+  name:'App',
+  data(){
+    return{
+      isRouterAlive:false
+    }
+  },
+  components:{ScaleBox, Index,Login},
+  methods:{
+    getLogin(data){
+      this.isRouterAlive = data;
+    }
+  },
+
+
+}
+
+</script>
+
+<style lang="scss">
+body {
+  margin: 0;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
+```
+
+注意：
+
+（1）使用px做单位，不使用rem
+
+（2）ScaleBox内部页面元素最大的盒子按照1920*1080为容器 严格计算。所有宽高加起来为1920*1080
+
+（3）最好不要使用百分比分配宽高
+
+参考：http://t.csdn.cn/jVJ8f
