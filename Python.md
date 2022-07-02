@@ -54,3 +54,7 @@ dets= np.loadtxt('dets.txt',delimiter=',')
 ### 0005 [-1]
 
 python中[-1]代表数组中的最后一位
+
+### 0006
+
+reverse() 反转数组
