@@ -47,14 +47,34 @@ dets= np.loadtxt('dets.txt',delimiter=',')
 ### 0004 pop函数和append函数
 
 ```python
-# pop()移除列表中的一个元素（默认为最后一个元素）返回值为移除的元素
-# append()将传入的对象添加到现有列表中(末尾)，无返回值，更新现有列表
+# pop(元素位置)移除列表中的一个元素（默认为最后一个元素）返回值为移除的元素
+# append(元素内容)将传入的对象添加到现有列表中(末尾)，无返回值，更新现有列表
+# insert(插入位置，插入元素)将元素插入数组指定位置
 ```
 
 ### 0005 [-1]
 
 python中[-1]代表数组中的最后一位
 
-### 0006
+### 0006 reverse
 
 reverse() 反转数组
+
+### 0007 join用法
+
+```python
+# join 将序列里的元素用指定的字符连接生成一个新的字符串
+a='I love China !'
+print(' '.join(a))
+print('-'.join(a))
+print('*'.join(a))
+
+#结果：
+I   l o v e   C h i n a   !
+I- -l-o-v-e- -C-h-i-n-a- -!
+I* *l*o*v*e* *C*h*i*n*a* *!
+# 可以使用 "".join 将多字符数组合并连接
+```
+
+
+
