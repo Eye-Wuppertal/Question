@@ -94,5 +94,14 @@ set(['r', 'b', 'u', 'n'])
 >>>
 ```
 
+### 0009 基础数学函数
+
+```python
+** #乘方  math.pow()
+math.fabs() #绝对值 
+math.exp() #exp/sin/cos等同
+
+```
+
 
 
