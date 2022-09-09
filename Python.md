@@ -103,5 +103,14 @@ math.exp() #exp/sin/cos等同
 
 ```
 
+### 0010 统计某个list中元素的个数
+
+```python
+# 如果是list 可以使用
+str(predict_test).count("1")
+# 如果是array 需要使用
+str(predict_test.tolist()).count("1")
+```
+
 
 
