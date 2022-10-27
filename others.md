@@ -32,3 +32,11 @@
 http://www.pdtools.net/tools/becron.jsp
 
 http://cron.qqe2.com/
+
+### 0002 latex 希腊字母对应表
+
+```latex
+$\alpha$ % 排版的时候出现公式和zhuan'h
+```
+
+![image-20221025021709941](img/image-20221025021709941.png)
