@@ -55,6 +55,22 @@ jsp 编码格式
 
 其次，idea工程的默认编码为GBK
 
-### 0002 快捷赋值
+### 0002 常用快捷
 
-"   ".var= CRTL+ALT+V
+"   ".var= CTRL+ALT+V   快速补全类和对象名
+
+Alt + lnsert 快速生成构造函数
+
+Ctrl + T  自动生成try/catch
+
+Ctrl + Alt + B  查看类的源代码
+
+Alt + Enter  修复
+
+ctrl+shift+J  合并字符串为一行
+
+ctrl+shift+N  查找类名、文件名、变量
+
+### 0003 scala生成变量自动勾选specify type
+
+![image-20230403164109105](img/image-20230403164109105.png)
