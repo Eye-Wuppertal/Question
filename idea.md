@@ -74,3 +74,17 @@ ctrl+shift+N  查找类名、文件名、变量
 ### 0003 scala生成变量自动勾选specify type
 
 ![image-20230403164109105](img/image-20230403164109105.png)
+
+### 0004 使用maven打包scala的时候没有类
+
+```shell
+x java.lang.ClassNotFoundException: com.tal.test.WordCountOnYarn
+# 可能存在的原因是 打包前clean把build生成的class给清掉了
+# 解决方法：项目重新build之后，直接点击package
+```
+
+### 0005 自定义快捷代码
+
+![image-20230404155225473](img/image-20230404155225473.png)
+
+![image-20230404155338655](img/image-20230404155338655.png)
