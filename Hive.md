@@ -22,3 +22,18 @@ load data local inpath '/root/a.txt' into table a;
 查看hive日志发现是root根目录权限问题
 
 ![image-20230426150639291](img/image-20230426150639291.png)
+
+在core-site.xml里添加
+
+```xml
+<property>
+    <name>hadoop.proxyuser.xxx.hosts</name>
+    <value>*</value>
+</property>
+<property>
+    <name>hadoop.proxyuser.xxx.groups</name>
+    <value>*</value>
+</property>
+```
+
+之前没有解决是因为property敲错了！！！！
