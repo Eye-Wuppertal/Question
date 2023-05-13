@@ -270,7 +270,7 @@ lead() -- 用法一致，为访问后面数据
 
 ```sql
 select date(date(),'-1 days') as 昨天, date() as 今天, date(date(),'+1 days') as 明天;
-datediff(day,starttime,endtime) -- 第一个参数表示你要的是天数还是其他日期，这个表示两个日期之间的天数，注意是endtime-starttime。
+datediff(day,endtime,starttime) -- 第一个参数表示你要的是天数还是其他日期，这个表示两个日期之间的天数，注意是endtime-starttime。
 date_sub(时间,interval * day/month/year) -- 减去*的时间
 date_add(时间,interval * day/month/year) -- 增加*的时间
 ```
@@ -291,4 +291,11 @@ SELECT CAST('12' AS int)
 -- CAST()函数和CONVERT()函数都不能执行四舍五入或截断操作。由于12.5不能用int数据类型来表示，所以对这个函数调用将产生一个错误，所以如果'12.5',类型就不能是int
 ```
 
-### 0023[SQL 计算占比](https://huaweicloud.csdn.net/63355d96d3efff3090b54452.html?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~activity-2-123530514-blog-122983734.235^v35^pc_relevant_increate_t0_download_v2_base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~activity-2-123530514-blog-122983734.235^v35^pc_relevant_increate_t0_download_v2_base&utm_relevant_index=5)
+### 0023 [SQL 计算占比](https://huaweicloud.csdn.net/63355d96d3efff3090b54452.html?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~activity-2-123530514-blog-122983734.235^v35^pc_relevant_increate_t0_download_v2_base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~activity-2-123530514-blog-122983734.235^v35^pc_relevant_increate_t0_download_v2_base&utm_relevant_index=5)
+
+如果是某个字段值出现的比例可以使用 avg("***" = "***")
+
+### 0024 union 和union all
+
+**union** 会自动压缩多个结果集合中的重复结果，而 **union all** 则将所有的结果全部显示出来，不管是不是重复。
+
