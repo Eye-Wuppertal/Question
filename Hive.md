@@ -37,3 +37,8 @@ load data local inpath '/root/a.txt' into table a;
 ```
 
 之前没有解决是因为property敲错了！！！！
+
+### 0004 [字符串函数](https://blog.csdn.net/qq_34941023/article/details/51550004)
+
+contains(a,b) 判断a中是否包含b
+
