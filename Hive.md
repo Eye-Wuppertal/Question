@@ -42,3 +42,8 @@ load data local inpath '/root/a.txt' into table a;
 
 contains(a,b) 判断a中是否包含b
 
+### 0005 != 和<>的区别
+
+在关系型数据库中两者几乎相等，但在Hive中两者有区别
+
+![image-20230605142306111](img/image-20230605142306111.png)

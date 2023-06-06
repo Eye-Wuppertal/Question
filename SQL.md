@@ -322,3 +322,15 @@ count (表达式 or null)
 
 - %任意个字符
 - _任意单个字符
+
+### 0030 nvl函数
+
+```sql
+-- comm为需要判断是否为空的列名 NVL函数的功能是实现空值的转换，根据第一个表达式的值是否为空值来返回相应的列名或表达式，主要用于对数据列上的空值进行处理，语法格式如：NVL( string1, replace_with)。
+数字型： NVL(comm,0);
+ 
+字符型： NVL( TO_CHAR(comm), 'No Commission')
+ 
+日期型： NVL（hiredate,' 31-DEC-99')
+```
+
