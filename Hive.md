@@ -74,3 +74,6 @@ select * from emp where ename  RLIKE '[A]';
 select * from emp where ename  RLIKE '^FOR';
 ```
 
+### 0007 Hive中没有left()和right()函数！！
+
+如果需要可以使用substring（）代替
