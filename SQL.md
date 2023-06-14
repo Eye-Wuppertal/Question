@@ -334,3 +334,16 @@ count (表达式 or null)
 日期型： NVL（hiredate,' 31-DEC-99')
 ```
 
+### 0031 核查两个表中不匹配的部分
+
+可以使用left join对字段依次on,看哪里出现null
+
+```sql
+select a.* from
+(select * from bass.DM_GRP_CD_FIGURE_FLAG_DM where stat_date='20230611' and is_qdk_flag='1') a
+left outer join
+(select * from dcstore.DM_GOMP_GRID_ENT_DM   where stat_date='20230611' and  md_list_flag='1' and grp_lvl in('C','D') ) b
+on a.boss_grp_id=b.grp_id
+where b.grp_id is null
+```
+
