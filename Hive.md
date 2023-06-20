@@ -1,6 +1,6 @@
 ### 0001 映射结构化数据去表头
 
-```hive
+```sql
 create table(id int ,name string)
 row format delimited
 fields terminated by ','
@@ -50,7 +50,7 @@ contains(a,b) 判断a中是否包含b
 
 ### 0006 like 和rlike
 
-```hive
+```sql
 -- like语法匹配
   % 代表零个或多个字符(任意个字符)。
   _ 代表一个字符
