@@ -77,3 +77,11 @@ select * from emp where ename  RLIKE '^FOR';
 ### 0007 Hive中没有left()和right()函数！！
 
 如果需要可以使用substring（）代替
+
+### 0008 Ambiguous column reference
+
+子查询中出现了重复字段
+
+### 0009 ParseException **** cannot recognize input near **** in joinSource
+
+检查是否是子查询未加别名
