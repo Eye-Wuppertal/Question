@@ -168,3 +168,21 @@ ax.invert_yaxis()
 ### 0012 pycharm 撤销忽略错误
 
 点击设置 -> 编辑器 -> 检查，在搜索图标右边有个筛选按钮，选择“仅显示修改的检查”，就可以找出被忽略的检查。
+
+### 0013 pandas 替换指定数据
+
+http://t.csdn.cn/PlsmK
+
+```python
+# 一、构造dataframe
+import pandas as pd
+import numpy as np
+df=pd.DataFrame(np.arange(16).reshape(4,4),columns=["sh","bj","sz","gz"],index=["one","two","three","four"])
+df.iloc[0,1]=np.nan
+# 二、替换指定数据（fillna、isin、replace)
+df.replace({"bj":{5:10,9:50},"gz":{7:10}})#将"bj"列的5替换为10，9替换为50，将gz列的7替换为10
+
+```
+
+
+
