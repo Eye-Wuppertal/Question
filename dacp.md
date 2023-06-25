@@ -16,3 +16,12 @@ STARTDATE!=''&&STARTDATE!=nil&&isNotBlank(STARTDATE)&&str(NETTYPE)=='GSM'&&(stri
 str_to_timestamp(STARTDATE,'yyyy-MM-dd HH:mm:ss')
 ```
 
+### 0004 实施指标开发流程
+
+1. 在指标库建立指标
+2. 实时指标的程序开发（可能含建模和外部表的使用）
+3. 在实时平台上线实时程序（在已有程序上增加更改需要走变更而不是上线），先跑几天
+4. 跑了几天数据后，编写SQL分别在离线平台和实时程序输出的明细表中查询核对数据
+5. 数据核对无误，发邮件确认（数据细分到地市）
+6. 上线实时指标（离线平台）
+
