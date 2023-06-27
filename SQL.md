@@ -347,3 +347,13 @@ on a.boss_grp_id=b.grp_id
 where b.grp_id is null
 ```
 
+### 0032 group_concat
+
+将group by产生的同一个分组中的值连接起来，返回一个字符串结果。
+
+```sql
+group_concat([distinct] 字段名 [order by 排序字段 asc/desc] [separator '分隔符'])
+# 例
+group_concat(distinct product order by product separator ',')	
+```
+
