@@ -357,3 +357,33 @@ group_concat([distinct] 字段名 [order by 排序字段 asc/desc] [separator '�
 group_concat(distinct product order by product separator ',')	
 ```
 
+### 0033 限定时间段的写法
+
+```sql
+# 以2020-02为例
+(1) order_date between '2020-02-01' and '2020-02-29'  
+(2) order_date like '2020-02%'  
+(3) DATE_FORMAT(order_date, "%Y-%m") = "2020-02"   
+(4) LEFT(order_date, 7) 或 substr(1, 7) = "2020-02" 
+```
+
+### 0034 行列转换
+
+行转列用groupby+sumif，列转行用union all
+
+```sql
+# 例：leetcode 1795
+select product_id,'store1' store, store1 price from Products where store1 is not null
+union all
+select product_id,'store2', store2 from Products where store2 is not null
+union all
+select product_id,'store3', store3 from Products where store3 is not null
+
+
+select product_id, sum(if(store = 'store1')) store1,
+                 , sum(if(store = 'store2')) store2,
+                 , sum(if(store = 'store3')) store3
+from Products
+group by product_id
+```
+
