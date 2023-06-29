@@ -27,3 +27,21 @@ if (!file.exists()) {
 String.format("./pyUse/emotion.py %s", meetingId)
 ```
 
+### 0004 字符串正则是否匹配
+
+```java
+String passwd = "rqbkjhrjqh1111@!45";
+String regex = "^[A-Za-z]|[0-9]|[!@#$%^&*]{6,18}$";
+if(!passwd .matches(regex)){
+    return false; //验证不通过
+}
+```
+
+### 0005  字符串首尾去空格
+
+```java
+str.trim()
+```
+
+
+
