@@ -135,3 +135,10 @@ DNS2="8.8.4.4"
 service network restart 
 ```
 
+### 0009 文件内容显示行号
+
+```shell
+# 在文件编辑页面esc后输入
+:set nu
+```
+
