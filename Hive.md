@@ -85,3 +85,7 @@ select * from emp where ename  RLIKE '^FOR';
 ### 0009 ParseException **** cannot recognize input near **** in joinSource
 
 检查是否是子查询未加别名
+
+### 0010 当使用order by 排序时顺序不对
+
+检查排序字段的数据类型，常见的错误是数字为string类型，不能
