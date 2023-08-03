@@ -89,3 +89,10 @@ select * from emp where ename  RLIKE '^FOR';
 ### 0010 当使用order by 排序时顺序不对
 
 检查排序字段的数据类型，常见的错误是数字为string类型，不能
+
+### 0011 不能直接使用int型字段作case when 的判断条件
+
+```sql
+case when （boolean）then  e1	else	e2
+```
+

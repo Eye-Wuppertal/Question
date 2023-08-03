@@ -42,6 +42,24 @@ str_to_timestamp(STARTDATE,'yyyy-MM-dd HH:mm:ss')
 1. 在指标库搜索离线指标，点击获取测试SQL
 2. 根据测试SQL截取业务逻辑，先删减与查询结果不相关的sql语句
 
+### 0007 Oracle分区
+
+```sql
+# 查询分区
+select * from user_tab_subpartitions where table_name = 'BOI_22649_DM'
+# 删除分区
+alter table DWD_RSVC_GM_EXT_USER_INFO_DM
+ drop partition P_STAT_MONTH_202308;
+# 新增分区
+alter table DWD_RSVC_GM_USER_WWG_REF_DM
+  add partition P_STAT_MONTH_202308 values ('202308')
+  (subpartition P_STAT_DATE_20230801 values ('20230801')) 
+# 新增子分区
+alter table BOI_22649_DM 
+modify partition P_STAT_MONTH_202307 add subpartition P_STAT_DATE_20230702 values('20230702');
+  
+```
+
 
 
 
