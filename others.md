@@ -62,3 +62,9 @@ End Sub
 ### 0004 excel 单元格换行
 
 alt+enter
+
+### 0005 将不可编辑保护文档变为可编辑
+
+可以转存为xml之后找到documentProtection字段，将"DocumentProtection"改为"unDocumentProtection"，
+
+然后用word打开xml转存为doc
