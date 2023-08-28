@@ -96,3 +96,21 @@ select * from emp where ename  RLIKE '^FOR';
 case when （boolean）then  e1	else	e2
 ```
 
+### 0012 查看Hive中表的所有信息
+
+```sql
+# 1.查询创建表的信息
+show create table <>
+# 2.查询表的字段信息
+desc <>
+# 3.表详细属性信息
+desc formatted <>
+# 4.表详细信息
+describe extended <>
+# 5.表分区信息
+show partitions <>
+
+```
+
+
+
