@@ -184,5 +184,14 @@ df.replace({"bj":{5:10,9:50},"gz":{7:10}})#将"bj"列的5替换为10，9替换�
 
 ```
 
+### 0014 if else 条件表达式
+
+```python
+<expression1> if <condition> else <expression2>
+# 判断condition真假，真则返回expression1，假则返回expression2
+```
+
+
+
 
 
