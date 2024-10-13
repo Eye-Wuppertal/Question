@@ -191,7 +191,64 @@ df.replace({"bj":{5:10,9:50},"gz":{7:10}})#将"bj"列的5替换为10，9替换�
 # 判断condition真假，真则返回expression1，假则返回expression2
 ```
 
+### 0015 np查看数据类型
 
+```python
+data.dtypes
+```
+
+### 0016 plot坐标轴设置
+
+```python
+# 设置坐标轴为整数
+plt.xlim(1, 6)
+# 设置刻度值
+plt.yticks(np.arange(1, 5, 0.25))
+```
+
+
+
+```python
+def evolve_based_on_best(fox):
+    kappa = np.random.uniform(0, 1)
+    best_foxes = best_foxes_broadcast.value
+    habitatCenter = [(best_foxes[0][0][i] + best_foxes[1][0][i]) / 2 for i in range(dimension_broadcast.value)]
+    
+    if kappa >= 0.35:
+        # 随机生成新个体
+        new_fox = [np.random.uniform(L_broadcast.value[i], R_broadcast.value[i]) for i in range(dimension_broadcast.value)]
+    else:
+        # 生成接近最佳个体中心的新个体
+        new_fox = []
+        for i in range(dimension_broadcast.value):
+            tmp = kappa * habitatCenter[i]
+            tmp = max(min(tmp, R_broadcast.value[i]), L_broadcast.value[i])
+            new_fox.append(tmp)
+    
+    return new_fox
+
+# 淘汰和繁衍过程
+def regenerate_population(foxes_rdd):
+    FromIndex = int(populationSize - 0.2 * populationSize)  # 确定淘汰个体的起始索引
+    # 保留前面的个体
+    retained_foxes_rdd = foxes_rdd.zipWithIndex().filter(lambda x: x[1] < FromIndex).map(lambda x: x[0])
+    # 淘汰后20%的个体，并基于最佳个体生成新个体
+    evolved_foxes_rdd = foxes_rdd.zipWithIndex().filter(lambda x: x[1] >= FromIndex).map(lambda x: evolve_based_on_best(x[0]))
+    
+    # 合并保留的个体和新生成的个体
+    updated_foxes_rdd = retained_foxes_rdd.union(evolved_foxes_rdd)
+    return updated_foxes_rdd
+
+# 应用淘汰和繁衍过程
+updated_foxes_rdd = regenerate_population(foxes_rdd)
+
+# 可选：重新计算适应度，排序，并选出新的最佳个体进行下一轮迭代
+foxes_with_fitness_rdd = distributed_fitness_function(updated_foxes_rdd)
+foxes_with_fitness_rdd = sort_by_fitness(foxes_with_fitness_rdd)
+best_foxes = updated_foxes_rdd.takeOrdered(2, key=lambda x: -x[1])  # 假设这里应用正确的适应度函数
+best_foxes_broadcast = sc.broadcast(best_foxes)
+
+```
 
 
 

@@ -423,3 +423,99 @@ MySQL 正则表达式通常是在检索数据库记录的时候，根据指定�
 - \s	表示单个空白字符，如空格或制表符
 - \S	表示单个非空白字符
 
+### 0035 建表语句和常用命令
+
+```sql
+CREATE TABLE  [IF NOT EXISTS] `表名` (
+	`字段名` 列类型 [属性] [索引] [注释],
+	`字段名` 列类型 [属性] [索引] [注释],
+	.......
+	`字段名` 列类型 [属性] [索引] [注释]
+) [表类型] [字符集设置] [注释]
+
+
+CREATE TABLE IF NOT EXIST 'student'(
+ 	`id` INT(4) NOT NULL AUTO_INCREMENT COMMENT '学号',   --comment注释，default默认
+ 	`name` VARCHAR(30) NOT NULL DEFAULT '匿名' COMMENT '姓名',
+ 	`pwd` VARCHAR(20) NOT NULL DEFAULT '123456' COMMENT '密码',
+ 	`sex` VARCHAR(2) NOT NULL DEFAULT '女' COMMENT '性别',
+ 	`birthday` DATETIME DEFAULT NULL COMMENT '出生日期',
+ 	`address` VARCHAR (100) DEFAULT NULL COMMENT '家庭地址',
+ 	`email` VARCHAR(50) DEFAULT NULL COMMENT '电子邮箱',
+ 	PRIMARY KEY(`id`)  --主键
+)ENGINE=INNODB DEFAULT CHARSET=utf8  --INNODB引擎
+
+SHOW CREATE DATABASE school --查看创建数据库的语句
+SHOW CREATE TABLE student --查看student数据表的定义语句
+DESC student --查看表的结构
+
+ALTER TABLE teacher RENAME AS allteacher  --修改表名
+ALTER TABLE allteacher ADD age INT(11)  --添加表的字段
+--修改表的字段
+ALTER TABLE allteacher MODIFY age VARCHAR(11)  --修改约束！
+ALTER TABLE allteacher CHANGE age age1 INT(1)  --字段重命名！
+
+
+ALTER TABLE teacher1 DROP age1 --删除表的字段
+DROP TABLE if EXISTS teacher1 --删除表，如果表存在。
+
+```
+
+### 0036 指令分类
+
+```sql
+1. DDL(Data Definition Language，数据定义语言)
+  主要用于维护存储数据的结构，这种结构包括数据库，表、视图、索引、同义词、聚簇等。
+
+代表指令：
+
+create 创建数据库和数据库的一些对象
+
+drop 删除数据库/表、索引、条件约束以及数据表的权限等
+
+alter 修改数据库表的定义及数据属性
+
+2. DML(Data Manipulation Language，数据操纵语言)
+  主要用于对数据库对象中包含的数据进行操作
+
+代表指令：
+
+insert 向数据库中插入一条数据
+
+delete 删除表中的一条或者多条记录
+
+update 修改表中的数据
+
+3. DQL(Data Query Language，数据查询语言)
+  主要用于查询数据库当中的数据
+
+代表指令：
+
+select 查询表中的数据
+from 查询哪张表、视图
+where 约束条件
+4. DCL(Data Control Language，数据控制语言)
+  主要控制数据库对象的权限管理、事务和实时监视。
+
+代表指令：
+
+grant分配权限给用户
+revoke废除数据库中某用户的权限
+rollback 退回到某一点 (回滚）
+commit 提交
+补充：commit
+  在数据库的插入、删除和修改操作时，只有当事务在提交到数据库时才算完成。在事务提交前，只有操作数据库的这个人才能有权看到所做的事情，别人只有在最后提交完成后才可以看到。提交数据有三种类型：显式提交、隐式提交及自动提交。
+
+显式提交
+用commit命令直接完成的提交为显式提交。commit;
+
+隐式提交
+用SQL命令间接完成的提交为隐式提交。这些命令有：
+
+alter、audit、comment、connect、create、disconnect、drop、exit、grant、noaudit、quit、revoke、rename。
+
+自动提交
+若把autocommit设置为on，则在插入、修改、删除语句执行后，系统将自动进行提交。set autocommit on;
+
+```
+

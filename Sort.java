@@ -222,13 +222,13 @@ public class Sort {
         
     }
     public static void main(String[] args) {
-        int[] nums1 = new int[]{8,9,1,7,2,3,5,5,6,4,3};
+        int[] nums1 = new int[]{5,7,9,1,3};
         // insertSort(nums1);
         // shellSort(nums1);
         // selectionSort(nums1);
         // bubbleSort(nums1);
-        // quickSort(nums1, 0, nums1.length-1);
-        mergeSort(nums1);
+        quickSort(nums1, 0, nums1.length-1);
+        // mergeSort(nums1);
         System.out.println(Arrays.toString(nums1));
     }
 }

@@ -28,6 +28,7 @@ $ ping IP地址
 $ ping 127.0.0.1
 scp -P port 01.py user@remote:Desktop/01.py
 # 把远程 家目录下的 Desktop/01.py 文件 复制到 本地当前目录下的 01.py
+
 ```
 
 - `ctrl + shift + =` **放大**终端窗口的字体显示
@@ -62,6 +63,12 @@ tar -xvf 用于解压   .tar后缀结尾的
 ### 0005 cp 和scp
 
 cp用于终端上的文件拷贝，scp用于跨终端的文件拷贝
+
+```shell
+scp -r spark-defaults.conf root@slave1:$PWD
+```
+
+
 
 ### 0006 rpm(RedHat Package Manager)
 
@@ -140,5 +147,22 @@ service network restart
 ```shell
 # 在文件编辑页面esc后输入
 :set nu
+```
+
+### 0010 虚拟机网卡只有lo，不能联网
+
+```shell
+1. 确保 vi /etc/sysconfig/network-scripts/ifcfg-ens33 
+ip地址和mac地址正确，克隆的一定要住HWADDR需要修改
+2. systemctl stop NetworkManager
+systemctl disable NetworkManager
+systemctl start network.service
+# 网卡启动/重启失败，流程同上
+```
+
+### 0011 查看端口占用情况
+
+```shell
+ netstat -ntulp | grep 10000 
 ```
 
